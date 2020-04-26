@@ -29,7 +29,7 @@ class BareBonesServerRequestHandler(BaseHTTPRequestHandler):
         query_components = parse_qs(urlparse(self.path).query)
         favorite_tree = None
 
-        if 'favoriteTree' in query_components:
+        if "favoriteTree" in query_components:
             favorite_tree = query_components["favoriteTree"][0]
 
         if favorite_tree:
@@ -38,7 +38,6 @@ class BareBonesServerRequestHandler(BaseHTTPRequestHandler):
             html = f"<html><head></head><body><h1>Please tell me your favorite tree</h1></body></html>"
 
         self.wfile.write(bytes(html, "utf8"))
-
 
     def do_POST(self):
         self.send_error(HTTP_METHOD_NOT_ALLOWED)
