@@ -23,7 +23,7 @@ Please tell me your favorite tree
 - [x] Test Cases
 - [x] Returns JSON response with status code `404` if the route is not defined/supported
 - [x] Index Controller logic refactor
-- [ ] Simple Docker container
+- [x] Simple Docker container
     
 
 
@@ -67,6 +67,10 @@ poetry install
 - Autoformat the code using `black` with the command
 ```bash
 black .
+```
+- Run the application using Docker with the command
+```bash
+docker-compose up
 ```
 - Run the server using the command
 ```bash
