@@ -17,7 +17,7 @@ Please tell me your favorite tree
 ```
 ---
 ## Backend Features
-- Basic Python Project setup using Poetry and Black *(SHA: 6e0b91e901bfd30b1a482e8aa95e5710d707a4b0)
+- Basic Python Project setup using Poetry and Black *(SHA: 6e0b91e901bfd30b1a482e8aa95e5710d707a4b0)*
 - Simple HTTP server with whitelisted HTTP methods *(SHA: d443bac5310ed8c7a5373e624868616feb62fa28)*
 - Index Controller for knowing the Favorite Tree *(SHA: cad892bf73ecec156048dc59588adaad923df2b0)*
 - Multithreaded Server *(SHA: e99c927e60910d9f415a9149624d04cd4eb835b2)*
@@ -31,6 +31,19 @@ Please tell me your favorite tree
 
 
 ---
+
+## Application Details
+- Python 3.7
+- Basic server using `http.server` 
+- Tests using `unittest`
+- Code autoformatter using [`black`](https://github.com/psf/black)
+- The application is divided into three components
+    - `barebones_server` is where the server logic resides; it includes routing, response generations and starting the multithreaded server
+    - `barebones_routes` is where the application routes and route handlers are mapped
+    - `barebones_controllers` is where the application controller logic reside
+- Simple Docker and Docker Compose configuration
+
+
 ## Python env
 - The project uses Python 3.7. Use [PyEnv](https://github.com/pyenv/pyenv) to install the required version
 - Python environment in managed through [Poetry](https://python-poetry.org/)
@@ -47,16 +60,6 @@ poetry shell
 poetry env info
 ```
 - In case of questions, please checkout the guide to maintaining virtual envs and python versions with over [here](https://python-poetry.org/docs/managing-environments/)
-
-## Application Details
-- Python 3.7
-- Basic server using `http.server` 
-- Tests using `unittest`
-- Code autoformatter using [`black`](https://github.com/psf/black)
-- The application is divided into three components
-    - `barebones_server` is where the server logic resides; it includes routing, response generations and starting the multithreaded server
-    - `barebones_routes` is where the application routes and route handlers are mapped
-    - `barebones_controllers` is where the application controller logic reside
 
 ## API details
 - Please enter the information as mentioned in the requirements
