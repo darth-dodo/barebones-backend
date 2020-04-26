@@ -55,6 +55,21 @@ class TestBareBonesServerRequestHandler(unittest.TestCase):
         default_response = "<html><head></head><body><h1>Please tell me your favorite tree</h1></body></html>"
         assert decoded_response == default_response
 
+    def test_index_page_response_with_invalid_params(self):
+        # create the required query params
+        query_args = {"favoriteAnimal": "Tiger"}
+        encoded_args = str(parse.urlencode(query_args))
+        request_url = f"{self.root_url}?{encoded_args}"
+
+        # send the request to the test server and decode the response
+        response = urllib_request.urlopen(request_url)
+        decoded_response = response.read().decode("utf-8")
+
+        # assert the response to the required html
+        default_response = "<html><head></head><body><h1>Please tell me your favorite tree</h1></body></html>"
+        assert decoded_response == default_response
+
+
     def test_index_page_response_with_blank_favorite_tree_param(self):
 
         # create the required query params

@@ -51,3 +51,21 @@ poetry env info
 ## API details
 - Please enter the information as mentioned in the requirements
 - In case, the value of favorite tree is kept blank, it will ask the default question
+
+## Commands
+- Install the dependency (`black`) using the command
+```bash
+poetry install
+```
+- Autoformat the code using `black` with the command
+```bash
+black .
+```
+- Run the server using the command
+```bash
+python barebones_server.py
+```
+- Run the test cases using the command
+```bash
+python -m unittest test_barebones_server.py
+```
