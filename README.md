@@ -21,7 +21,10 @@ Please tell me your favorite tree
 - [x] Index Controller for knowing the Favorite Tree
 - [x] Multithreaded Server
 - [x] Test Cases
-- [ ] Specific Routes and 404s
+- [x] Returns JSON response with status code `404` if the route is not defined/supported
+- [ ] Index Controller logic refactor
+- [ ] Simple Docker container
+    
 
 
 ---
