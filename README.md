@@ -17,14 +17,16 @@ Please tell me your favorite tree
 ```
 ---
 ## Backend Features
+- Basic Python Project setup using Poetry and Black *(SHA: 6e0b91e901bfd30b1a482e8aa95e5710d707a4b0)
 - Simple HTTP server with whitelisted HTTP methods *(SHA: d443bac5310ed8c7a5373e624868616feb62fa28)*
 - Index Controller for knowing the Favorite Tree *(SHA: cad892bf73ecec156048dc59588adaad923df2b0)*
-- Multithreaded Server *(SHA: d443bac5310ed8c7a5373e624868616feb62fa28)*
+- Multithreaded Server *(SHA: e99c927e60910d9f415a9149624d04cd4eb835b2)*
 - Barebones Test Cases *(SHA: 6f7da48c1364c76052f593aa7fd6ae25bfe016fd)*
 - Barebones Controller *(SHA: 567602907b77288cbc6096586278d278b4710a96)*
 - 404 handler and DRY headers logic *(SHA: 567602907b77288cbc6096586278d278b4710a96)* 
 - Index Controller logic refactor *(SHA: b9ee7598a366c5ec750d24d7729276a119447f90)*
 - Simple Docker container *(SHA: 98e3769029b8879d4ff4de63c879ae9d2b1eff05)*
+- Documentation
     
 
 
