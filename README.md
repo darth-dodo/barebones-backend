@@ -20,7 +20,7 @@ Please tell me your favorite tree
 - [x] Simple HTTP server with whitelisted HTTP methods
 - [x] Index Controller for knowing the Favorite Tree
 - [x] Multithreaded Server
-- [ ] Test Cases
+- [x] Test Cases
 - [ ] Specific Routes and 404s
 
 

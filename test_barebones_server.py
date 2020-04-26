@@ -69,7 +69,6 @@ class TestBareBonesServerRequestHandler(unittest.TestCase):
         default_response = "<html><head></head><body><h1>Please tell me your favorite tree</h1></body></html>"
         assert decoded_response == default_response
 
-
     def test_index_page_response_with_blank_favorite_tree_param(self):
 
         # create the required query params
