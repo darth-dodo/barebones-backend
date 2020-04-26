@@ -18,7 +18,7 @@ Please tell me your favorite tree
 ---
 ## Backend Features
 - Simple HTTP server with whitelisted HTTP methods *(SHA: d443bac5310ed8c7a5373e624868616feb62fa28)*
-- Index Controller for knowing the Favorite Tree *(SHA: d443bac5310ed8c7a5373e624868616feb62fa28)*
+- Index Controller for knowing the Favorite Tree *(SHA: cad892bf73ecec156048dc59588adaad923df2b0)*
 - Multithreaded Server *(SHA: d443bac5310ed8c7a5373e624868616feb62fa28)*
 - Barebones Test Cases *(SHA: 6f7da48c1364c76052f593aa7fd6ae25bfe016fd)*
 - Barebones Controller *(SHA: 567602907b77288cbc6096586278d278b4710a96)*
