@@ -35,11 +35,10 @@ class BareBonesServerRequestHandler(BaseHTTPRequestHandler):
         if not router:
             router = SIMPLE_ROUTER["404"]
 
-        route_name = router["name"]
         route_handler = router["handler"]
         route_content_type = router["content_type"]
 
-        payload = {"message": "This page does not exist!"}
+        payload = route_handler(self)
 
         self._set_response_headers(HTTP_STATUS_OK, route_content_type)
         self._response_parser(payload, route_content_type)
