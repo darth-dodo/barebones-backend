@@ -8,6 +8,7 @@ from routes import SIMPLE_ROUTER
 
 HTTP_STATUS_METHOD_NOT_ALLOWED = 405
 HTTP_STATUS_OK = 200
+HTTP_STATUS_DOES_NOT_EXIST = 404
 
 
 class BareBonesServerRequestHandler(BaseHTTPRequestHandler):
@@ -28,33 +29,38 @@ class BareBonesServerRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
 
+        response_status_code = HTTP_STATUS_OK
+
         parsed_path = parse.urlparse(self.path)
         router = SIMPLE_ROUTER.get(parsed_path.path)
 
         # if the path cannot be matched to a route, forward it to the 404 handler
         if not router:
             router = SIMPLE_ROUTER["404"]
+            response_status_code = HTTP_STATUS_DOES_NOT_EXIST
 
-        route_handler = router["handler"]
-        route_content_type = router["content_type"]
+            route_handler = router["handler"]
+            route_content_type = router["content_type"]
 
-        payload = route_handler(self)
+            payload = route_handler(self)
 
-        self._set_response_headers(HTTP_STATUS_OK, route_content_type)
-        self._response_parser(payload, route_content_type)
+            self._set_response_headers(response_status_code, route_content_type)
+            self._response_parser(payload, route_content_type)
+            return
 
-        # query_components = parse_qs(urlparse(self.path).query)
-        # favorite_tree = None
-        #
-        # if "favoriteTree" in query_components:
-        #     favorite_tree = query_components["favoriteTree"][0]
-        #
-        # if favorite_tree:
-        #     html = f"<html><head></head><body><h1>It's nice to know that your favorite tree is a {favorite_tree}</h1></body></html>"
-        # else:
-        #     html = f"<html><head></head><body><h1>Please tell me your favorite tree</h1></body></html>"
-        #
-        # self.wfile.write(bytes(html, "utf8"))
+        query_components = parse_qs(urlparse(self.path).query)
+        favorite_tree = None
+
+        if "favoriteTree" in query_components:
+            favorite_tree = query_components["favoriteTree"][0]
+
+        if favorite_tree:
+            html = f"<html><head></head><body><h1>It's nice to know that your favorite tree is a {favorite_tree}</h1></body></html>"
+        else:
+            html = f"<html><head></head><body><h1>Please tell me your favorite tree</h1></body></html>"
+
+        self._set_response_headers(response_status_code, "text/html")
+        self.wfile.write(bytes(html, "utf8"))
 
     def do_POST(self):
         self.send_error(HTTP_STATUS_METHOD_NOT_ALLOWED)
