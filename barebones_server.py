@@ -3,6 +3,9 @@ import json
 import time
 
 
+HTTP_METHOD_NOT_ALLOWED = 405
+
+
 class BareBonesServerHandler(BaseHTTPRequestHandler):
     def do_GET(self):
 
@@ -17,6 +20,18 @@ class BareBonesServerHandler(BaseHTTPRequestHandler):
 
         # provide the payload
         self.wfile.write(bytes(json.dumps(payload), "utf-8"))
+
+    def do_POST(self):
+        self.send_error(HTTP_METHOD_NOT_ALLOWED)
+
+    def do_PUT(self):
+        self.send_error(HTTP_METHOD_NOT_ALLOWED)
+
+    def do_PATCH(self):
+        self.send_error(HTTP_METHOD_NOT_ALLOWED)
+
+    def do_DELETE(self):
+        self.send_error(HTTP_METHOD_NOT_ALLOWED)
 
 
 if __name__ == "__main__":
