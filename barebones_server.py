@@ -82,7 +82,7 @@ if __name__ == "__main__":
     server = ThreadedHTTPServer(("0.0.0.0", 8000), BareBonesServerRequestHandler)
 
     try:
-        server_info_message = f"\n\n\tStarting the server at {server.server_address} on {time.asctime()}\n\n"
+        server_info_message = f"\n\n\tStarting the server at http://{server.server_address[0]}:{server.server_port} on {time.asctime()}\n\n"
         print(server_info_message)
         server.serve_forever()
     except KeyboardInterrupt:
