@@ -12,6 +12,50 @@ HTTP_STATUS_DOES_NOT_EXIST = 404
 
 
 class BareBonesServerRequestHandler(BaseHTTPRequestHandler):
+    """
+     - Entry point for the Request
+     - Extract the routes from `SIMPLE_ROUTER` and execute the handler method logic
+     - Provide the response to the `_response_parser` to generate the response based on header content type
+     - 404 handler for invalid URLs
+     - Blacklist HTTP verbs besides GET
+    """
+
+    def do_GET(self):
+
+        # set the status as 200 by default
+        response_status_code = HTTP_STATUS_OK
+
+        # extract the path and try to find in the registered routes
+        parsed_path = parse.urlparse(self.path)
+        router = SIMPLE_ROUTER.get(parsed_path.path)
+
+        # if the path cannot be matched to a route, forward it to the 404 handler and reset the status
+        if not router:
+            router = SIMPLE_ROUTER["404"]
+            response_status_code = HTTP_STATUS_DOES_NOT_EXIST
+
+        route_handler = router["handler"]
+        route_content_type = router["content_type"]
+
+        # execute the logic inside the handler (controller)
+        payload = route_handler(self)
+
+        # set the headers and pass the payload to the response parser
+        self._set_response_headers(response_status_code, route_content_type)
+        self._response_parser(payload, route_content_type)
+
+    def do_POST(self):
+        self.send_error(HTTP_STATUS_METHOD_NOT_ALLOWED)
+
+    def do_PUT(self):
+        self.send_error(HTTP_STATUS_METHOD_NOT_ALLOWED)
+
+    def do_PATCH(self):
+        self.send_error(HTTP_STATUS_METHOD_NOT_ALLOWED)
+
+    def do_DELETE(self):
+        self.send_error(HTTP_STATUS_METHOD_NOT_ALLOWED)
+
     def _set_response_headers(self, status_code, content_type):
         """Reusable method for setting the response headers"""
         self.send_response(status_code)
@@ -26,53 +70,6 @@ class BareBonesServerRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(bytes(json.dumps(payload), "utf-8"))
         elif content_type == "text/html":
             self.wfile.write(bytes(payload, "utf8"))
-
-    def do_GET(self):
-
-        response_status_code = HTTP_STATUS_OK
-
-        parsed_path = parse.urlparse(self.path)
-        router = SIMPLE_ROUTER.get(parsed_path.path)
-
-        # if the path cannot be matched to a route, forward it to the 404 handler
-        if not router:
-            router = SIMPLE_ROUTER["404"]
-            response_status_code = HTTP_STATUS_DOES_NOT_EXIST
-
-            route_handler = router["handler"]
-            route_content_type = router["content_type"]
-
-            payload = route_handler(self)
-
-            self._set_response_headers(response_status_code, route_content_type)
-            self._response_parser(payload, route_content_type)
-            return
-
-        query_components = parse_qs(urlparse(self.path).query)
-        favorite_tree = None
-
-        if "favoriteTree" in query_components:
-            favorite_tree = query_components["favoriteTree"][0]
-
-        if favorite_tree:
-            html = f"<html><head></head><body><h1>It's nice to know that your favorite tree is a {favorite_tree}</h1></body></html>"
-        else:
-            html = f"<html><head></head><body><h1>Please tell me your favorite tree</h1></body></html>"
-
-        self._set_response_headers(response_status_code, "text/html")
-        self.wfile.write(bytes(html, "utf8"))
-
-    def do_POST(self):
-        self.send_error(HTTP_STATUS_METHOD_NOT_ALLOWED)
-
-    def do_PUT(self):
-        self.send_error(HTTP_STATUS_METHOD_NOT_ALLOWED)
-
-    def do_PATCH(self):
-        self.send_error(HTTP_STATUS_METHOD_NOT_ALLOWED)
-
-    def do_DELETE(self):
-        self.send_error(HTTP_STATUS_METHOD_NOT_ALLOWED)
 
 
 class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
