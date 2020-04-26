@@ -22,7 +22,7 @@ Please tell me your favorite tree
 - [x] Multithreaded Server
 - [x] Test Cases
 - [x] Returns JSON response with status code `404` if the route is not defined/supported
-- [ ] Index Controller logic refactor
+- [x] Index Controller logic refactor
 - [ ] Simple Docker container
     
 
@@ -50,6 +50,10 @@ poetry env info
 - Basic server using `http.server` 
 - Tests using `unittest`
 - Code autoformatter using [`black`](https://github.com/psf/black)
+- The application is divided into three components
+    - `barebones_server` is where the server logic resides; it includes routing, response generations and starting the multithreaded server
+    - `barebones_routes` is where the application routes and route handlers are mapped
+    - `barebones_controllers` is where the application controller logic reside
 
 ## API details
 - Please enter the information as mentioned in the requirements
