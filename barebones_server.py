@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import time
 from urllib.parse import parse_qs, urlparse
+from socketserver import ThreadingMixIn
 
 
 HTTP_METHOD_NOT_ALLOWED = 405
@@ -52,8 +53,14 @@ class BareBonesServerRequestHandler(BaseHTTPRequestHandler):
         self.send_error(HTTP_METHOD_NOT_ALLOWED)
 
 
+class ThreadedHTTPServer(ThreadingMixIn, HTTPServer):
+    """Handle requests in a separate thread."""
+
+    pass
+
+
 if __name__ == "__main__":
-    server = HTTPServer(("0.0.0.0", 8000), BareBonesServerRequestHandler)
+    server = ThreadedHTTPServer(("0.0.0.0", 8000), BareBonesServerRequestHandler)
 
     try:
         server_info_message = f"\n\n\tStarting the server at {server.server_address} on {time.asctime()}\n\n"

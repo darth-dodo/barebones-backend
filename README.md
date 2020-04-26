@@ -17,8 +17,12 @@ Please tell me your favorite tree
 ```
 ---
 ## Backend Features
-- [x] Simple HTTP server
-- [ ] Index Controller
+- [x] Simple HTTP server with whitelisted HTTP methods
+- [x] Index Controller for knowing the Favorite Tree
+- [x] Multithreaded Server
+- [ ] Test Cases
+- [ ] Specific Routes and 404s
+
 
 ---
 ## Python env
@@ -43,3 +47,7 @@ poetry env info
 - Basic server using `http.server` 
 - Tests using `unittest`
 - Code autoformatter using [`black`](https://github.com/psf/black)
+
+## API details
+- Please enter the information as mentioned in the requirements
+- In case, the value of favorite tree is kept blank, it will ask the default question
