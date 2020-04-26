@@ -20,8 +20,11 @@ Please tell me your favorite tree
 - [x] Simple HTTP server with whitelisted HTTP methods
 - [x] Index Controller for knowing the Favorite Tree
 - [x] Multithreaded Server
-- [ ] Test Cases
-- [ ] Specific Routes and 404s
+- [x] Test Cases
+- [x] Returns JSON response with status code `404` if the route is not defined/supported
+- [ ] Index Controller logic refactor
+- [ ] Simple Docker container
+    
 
 
 ---

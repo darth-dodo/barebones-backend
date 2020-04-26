@@ -1,6 +1,7 @@
 import unittest
 import threading
 import time
+import json
 from urllib import request as urllib_request
 from urllib import parse
 from urllib import error as urllib_error
@@ -69,7 +70,6 @@ class TestBareBonesServerRequestHandler(unittest.TestCase):
         default_response = "<html><head></head><body><h1>Please tell me your favorite tree</h1></body></html>"
         assert decoded_response == default_response
 
-
     def test_index_page_response_with_blank_favorite_tree_param(self):
 
         # create the required query params
@@ -98,3 +98,16 @@ class TestBareBonesServerRequestHandler(unittest.TestCase):
         # assert the response to the required html
         default_response = "<html><head></head><body><h1>It's nice to know that your favorite tree is a Neem</h1></body></html>"
         assert decoded_response == default_response
+
+    def test_response_from_404_handler(self):
+        random_suffix = "favoritePlant"
+        does_not_exist_url = f"{self.root_url}{random_suffix}"
+
+        try:
+            urllib_request.urlopen(does_not_exist_url)
+        except urllib_error.HTTPError as response:
+            assert response.code == 404
+            response_message = json.loads(response.read().decode())
+            assert response_message == {
+                "message": "Path /favoritePlant does not exist!"
+            }
