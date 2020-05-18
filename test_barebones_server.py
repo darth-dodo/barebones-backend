@@ -5,7 +5,7 @@ import json
 from urllib import request as urllib_request
 from urllib import parse
 from urllib import error as urllib_error
-from barebones_server import ThreadedHTTPServer, BareBonesServerRequestHandler
+from app.barebones_server import ThreadedHTTPServer, BareBonesServerRequestHandler
 
 
 class TestBareBonesServerRequestHandler(unittest.TestCase):

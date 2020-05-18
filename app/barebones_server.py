@@ -1,10 +1,9 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import time
-from urllib.parse import parse_qs, urlparse
 from urllib import parse
 from socketserver import ThreadingMixIn
-from barebones_routes import SIMPLE_ROUTER
+from app.barebones_routes import SIMPLE_ROUTER
 
 HTTP_STATUS_METHOD_NOT_ALLOWED = 405
 HTTP_STATUS_OK = 200
