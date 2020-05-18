@@ -1,4 +1,4 @@
-from barebones_controller import four_oh_four_handler, index
+from app.barebones_controller import four_oh_four_handler, index
 
 SIMPLE_ROUTER = {
     "/": {"name": "index", "handler": index, "content_type": "text/html"},
